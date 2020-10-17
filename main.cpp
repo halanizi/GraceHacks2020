@@ -36,15 +36,10 @@ void vocabulary()
     answer_file.close();
 }
 
-int main(int argc, char **argv)
-{
+void selection(){
     int x = 0;
     string option;
     char input;
-    //int lengthOfOption;
-
-    cout << "Welcome! Pick a category to start the game:\n"
-         << endl;
     while (x == 0)
     {
         cout << "         (1) Vocabulary" << endl;
@@ -82,7 +77,41 @@ int main(int argc, char **argv)
                  << endl;
         }
     }
-    cout << "Thanks for playing!" << endl;
 
+}
+
+void play(){
+int x=0;
+string playAgain;
+    char again;
+    while(x==0){
+    cout<<"Would you like to choose another category?"<<endl;
+    cin>>playAgain;
+    again = playAgain.at(0);
+    switch(again){
+        case 'Y':
+        case 'y':
+            //start the main again
+            cout<<"Thank you for playing again! Pick another category!"<<endl;
+
+            selection();
+            break;
+        
+        case 'N':
+        case 'n':
+        x=1;
+            cout<<"Thanks for playing!"<<endl;
+            break;
+    }
+    }
+}
+
+int main(int argc, char **argv)
+{
+    int points;
+    int result;
+    cout << "Welcome! Pick a category to start the game:\n"<< endl;
+    selection();
+    play();
     return (0);
 }
