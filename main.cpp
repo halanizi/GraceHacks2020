@@ -10,7 +10,7 @@ int points;
 void vocabulary();
 void history();
 void influencers();
-void q_and_a(vector<string>, vector<string>);
+void q_and_a(vector<string>, vector<string>, vector<string>);
 void selection();
 void play();
 bool checkString(string);
@@ -30,9 +30,12 @@ void vocabulary() {
     question_file.open("definitions.txt");
     ifstream answer_file; // read mode
     answer_file.open("vocab.txt");
+    ifstream links_file; // read mode
+    links_file.open("vocablinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
     while (getline(question_file, line)) {
@@ -41,11 +44,15 @@ void vocabulary() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
 
     question_file.close();
     answer_file.close();
+    links_file.close();
 
-    q_and_a(questions, answers);
+    q_and_a(questions, answers, links);
 }
 
 void history() {
@@ -53,9 +60,12 @@ void history() {
     question_file.open("inventions.txt");
     ifstream answer_file; // read mode
     answer_file.open("inventors.txt");
+    ifstream links_file; // read mode
+    links_file.open("inventorlinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
     while (getline(question_file, line)) {
@@ -64,10 +74,15 @@ void history() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
 
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
+    links_file.close();
+
+    q_and_a(questions, answers, links);
 
 }
 
@@ -76,9 +91,12 @@ void influencers() {
     question_file.open("quotes.txt");
     ifstream answer_file; // read mode
     answer_file.open("speakers.txt");
+    ifstream links_file; // read mode
+    links_file.open("speakerlinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
     while (getline(question_file, line)) {
@@ -87,13 +105,18 @@ void influencers() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
 
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
+    links_file.close();
+
+    q_and_a(questions, answers, links);
 }
 
-void q_and_a(vector<string> q, vector<string> a) {
+void q_and_a(vector<string> q, vector<string> a, vector<string> l) {
     unsigned int i = 0;
     string response;
 
@@ -106,18 +129,22 @@ void q_and_a(vector<string> q, vector<string> a) {
         //char response[100];
         string response;
         //cin.ignore();
-        if(i==0) getline(cin, response);
+
+        if (i == 0) {
+            getline(cin, response);
+        }
         getline(cin, response);
-        //cin.getline(response, 100);
+
 
  //       cout << "Response was: " << response << endl;
  //       cout << "A[i] is: " << a[i] << endl;
 
         if (a[i].compare(response) == 0) {
-            i++;
-            cout << "Correct!" << endl;
+            cout << "Correct! If you'd like to learn more about this term, navigate to this link :" << endl;
+	    cout << l[i] << endl;
+	    i++;
             points++;
-            cout << "Yay!" << endl;
+ //         cout << "Yay!" << endl;
             ifstream correct_art;
             correct_art.open("goodjob.txt");
             cout << correct_art.rdbuf();
@@ -145,6 +172,7 @@ void selection(){
     char input;
     while (x == 0)
     {
+
         cout << "          * Vocabulary" << endl;
         cout << "          * History" << endl;
         cout << "          * Influencers" << endl;
