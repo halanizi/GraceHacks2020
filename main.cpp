@@ -5,6 +5,7 @@
 //#include "Vocabulary.h" //this is if we are calling a function from another file
 
 using namespace std;
+int points;
 
 void vocabulary();
 void history();
@@ -15,6 +16,7 @@ void play();
 
 int main(int argc, char **argv)
 {
+    //int points=0;
     cout << "Welcome! Pick a category to start the game:\n"<< endl;
     selection();
     play();
@@ -113,12 +115,14 @@ void q_and_a(vector<string> q, vector<string> a) {
         if (a[i].compare(response) == 0) {
             i++;
             cout << "Correct!" << endl;
+            points++;
             cout << "Yay!" << endl;
             ifstream correct_art;
             correct_art.open("goodjob.txt");
             cout << correct_art.rdbuf();
             correct_art.close();
             //continue;
+
         } else {
             cout << "I'm sorry, that's not the right answer" << endl;
             ifstream not_correct_art; // read mode
@@ -126,16 +130,15 @@ void q_and_a(vector<string> q, vector<string> a) {
             cout << not_correct_art.rdbuf();
             not_correct_art.close();
         }
-
-        if (i == q.size()) break;
+        if(i==q.size()){
+            break;
+        }
     }
     cout <<"You finished the category!" << endl;
-
 }
 
-
-
 void selection(){
+    points = 0;
     int x = 0;
     string option;
     char input;
@@ -180,13 +183,13 @@ void selection(){
 }
 
 void play(){
-    int points;
+    //int points;
     int result;
     int x=0;
     string playAgain;
     char again;
     while(x==0){
-
+        cout<<"You scored "<<points<<"points!\n"<<endl;
         cout<<"Would you like to choose another category?"<<endl;
         cin>>playAgain;
         again = playAgain.at(0);
