@@ -17,6 +17,11 @@ void play();
 int main(int argc, char **argv)
 {
     //int points=0;
+    ifstream welcome_file;
+    welcome_file.open("welcome.txt");
+    cout << welcome_file.rdbuf();
+    welcome_file.close();
+
     cout << "Welcome! Pick a category to start the game:\n"<< endl;
     selection();
     play();
