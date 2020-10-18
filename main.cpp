@@ -64,11 +64,6 @@ void history() {
         answers.push_back(line);
     }
 
-/*    for (unsigned int i = 0; i < questions.size(); i++) {
-        cout << questions.at(i) << endl;
-        cout << i << endl;
-    } */
-
     question_file.close();
     answer_file.close();
     q_and_a(questions, answers);
@@ -92,11 +87,6 @@ void influencers() {
         answers.push_back(line);
     }
 
-/*    for (unsigned int i = 0; i < questions.size(); i++) {
-        cout << questions.at(i) << endl;
-        cout << i << endl;
-    } */
-
     question_file.close();
     answer_file.close();
     q_and_a(questions, answers);
@@ -105,12 +95,6 @@ void influencers() {
 void q_and_a(vector<string> q, vector<string> a) {
     unsigned int i = 0;
     string response;
-//    cout << "Size of q is: " << q.size() << endl;
-
-    /*for (unsigned int j = 0; j != q.size(); j++) {
-        cout << q[j] << endl;
-    }*/
-
 
     while(i < sizeof(q)) {
         cout << q[i] << endl;
@@ -156,13 +140,13 @@ void selection(){
         case 'h':
             x = 1;
             //cout<<"Case2"<<endl;
-            void History();
+            history();
             break;
         case 'I':
         case 'i':
             x = 1;
             //cout<<"Case3"<<endl;
-            void Influencers();
+            influencers();
             break;
         default:
             cout << "Invalid Option! Try Again\n"
@@ -188,7 +172,7 @@ string playAgain;
 
             selection();
             break;
-        
+
         case 'N':
         case 'n':
         x=1;
