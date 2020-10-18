@@ -94,24 +94,40 @@ void q_and_a(vector<string> q, vector<string> a) {
     unsigned int i = 0;
     string response;
 
-    ifstream correct_art;
-    correct_art.open("goodjob.txt");
-    ifstream not_correct_art; // read mode
-    not_correct_art.open("wrong.txt");
+//    cout <<"Num elements in vector is: " << q.size() << endl;
+//    cout <<"num elements in vector a: " << a.size() << endl;
 
-
-    while(i < sizeof(q)) {
+    while(i < q.size()) {
         cout << q[i] << endl;
-        cin >> response;
+
+        //char response[100];
+        string response;
+        //cin.ignore();
+        getline(cin, response);
+        getline(cin, response);
+        //cin.getline(response, 100);
+
+ //       cout << "Response was: " << response << endl;
+ //       cout << "A[i] is: " << a[i] << endl;
+
         if (a[i].compare(response) == 0) {
             i++;
             cout << "Correct!" << endl;
+            cout << "Yay!" << endl;
+            ifstream correct_art;
+            correct_art.open("goodjob.txt");
             cout << correct_art.rdbuf();
+            correct_art.close();
+            //continue;
         } else {
             cout << "I'm sorry, that's not the right answer" << endl;
+            ifstream not_correct_art; // read mode
+            not_correct_art.open("wrong.txt");
             cout << not_correct_art.rdbuf();
-
+            not_correct_art.close();
         }
+
+        if (i == q.size()) break;
     }
     cout <<"You finished the category!" << endl;
 
