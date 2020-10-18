@@ -10,7 +10,7 @@ int points;
 void vocabulary();
 void history();
 void influencers();
-void q_and_a(vector<string>, vector<string>);
+void q_and_a(vector<string>, vector<string>, vector<string>);
 void selection();
 void play();
 
@@ -24,27 +24,35 @@ int main(int argc, char **argv)
 }
 
 void vocabulary() {
-//    cout << "howdy" << endl;
     ifstream question_file; // read mode
     question_file.open("definitions.txt");
     ifstream answer_file; // read mode
     answer_file.open("vocab.txt");
+    ifstream links_file; // read mode
+    links_file.open("vocablinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
+    string prompt = "Match this definition to a vocabulary term:";
     while (getline(question_file, line)) {
         questions.push_back(line);
     }
+    questions.push_back(prompt);
     while (getline(answer_file, line)) {
         answers.push_back(line);
+    }
+    while (getline(links_file, line)) {
+        links.push_back(line);
     }
 
     question_file.close();
     answer_file.close();
+    links_file.close();
 
-    q_and_a(questions, answers);
+    q_and_a(questions, answers, links);
 }
 
 void history() {
@@ -52,21 +60,31 @@ void history() {
     question_file.open("inventions.txt");
     ifstream answer_file; // read mode
     answer_file.open("inventors.txt");
+    ifstream links_file; // read mode
+    links_file.open("inventorlinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
+    string prompt = "Match this invention to a female inventor:";
     while (getline(question_file, line)) {
         questions.push_back(line);
     }
+    questions.push_back(prompt);
     while (getline(answer_file, line)) {
         answers.push_back(line);
+    }
+    while (getline(links_file, line)) {
+        links.push_back(line);
     }
 
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
+    links_file.close();
+
+    q_and_a(questions, answers, links);
 
 }
 
@@ -75,56 +93,66 @@ void influencers() {
     question_file.open("quotes.txt");
     ifstream answer_file; // read mode
     answer_file.open("speakers.txt");
+    ifstream links_file; // read mode
+    links_file.open("speakerlinks.txt");
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
+    string prompt = "Match this quote to a female speaker:";
     while (getline(question_file, line)) {
         questions.push_back(line);
     }
+    questions.push_back(prompt);
     while (getline(answer_file, line)) {
         answers.push_back(line);
+    }
+    while (getline(links_file, line)) {
+        links.push_back(line);
     }
 
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
+    links_file.close();
+
+    q_and_a(questions, answers, links);
 }
 
-void q_and_a(vector<string> q, vector<string> a) {
+void q_and_a(vector<string> q, vector<string> a, vector<string> l) {
     unsigned int i = 0;
     string response;
+    string prompt;
 
-//    cout <<"Num elements in vector is: " << q.size() << endl;
-//    cout <<"num elements in vector a: " << a.size() << endl;
 
-    while(i < q.size()) {
+    while(i < 10) { //element q[10] is the prompt
+        cout << "" << endl;
+        cout << q[10] << endl;
+        cout << "" << endl;
         cout << q[i] << endl;
+        cout << "" << endl;
 
-        //char response[100];
-        string response;
-        //cin.ignore();
         if (i == 0) {
             getline(cin, response);
         }
         getline(cin, response);
-        string solution = a[i];
 
+        string solution = a[i];
+        
         for (unsigned int j = 0; j < response.size(); j++) {
             response[j] = tolower(response[j]);
         }
         for (unsigned int k = 0; k < solution.size(); k++) {
             solution[k] = tolower(solution[k]);
         }
- //       cout << "Response was: " << response << endl;
- //       cout << "A[i] is: " << a[i] << endl;
 
         if (solution.compare(response) == 0) {
+            cout << "Correct! If you'd like to learn more about this term, navigate to this link :" << endl;
+            cout << l[i] << endl;
             i++;
-            cout << "Correct!" << endl;
             points++;
-            cout << "Yay!" << endl;
+ //         cout << "Yay!" << endl;
             ifstream correct_art;
             correct_art.open("goodjob.txt");
             cout << correct_art.rdbuf();
@@ -192,7 +220,7 @@ void selection(){
 
 void play(){
     //int points;
-    int result;
+    //int result;
     int x=0;
     string playAgain;
     char again;
@@ -209,14 +237,17 @@ void play(){
 
                 selection();
                 break;
-        
+
             case 'N':
             case 'n':
                 x=1;
                cout<<"Thanks for playing!"<<endl;
+                ifstream lady_art;
+            lady_art.open("lady.txt");
+            cout << lady_art.rdbuf();
+            lady_art.close();
                 break;
         }
     }
 }
-
 
