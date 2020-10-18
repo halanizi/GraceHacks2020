@@ -109,11 +109,18 @@ void q_and_a(vector<string> q, vector<string> a) {
             getline(cin, response);
         }
         getline(cin, response);
+        string solution = a[i];
 
+        for (unsigned int j = 0; j < response.size(); j++) {
+            response[j] = tolower(response[j]);
+        }
+        for (unsigned int k = 0; k < solution.size(); k++) {
+            solution[k] = tolower(solution[k]);
+        }
  //       cout << "Response was: " << response << endl;
  //       cout << "A[i] is: " << a[i] << endl;
 
-        if (a[i].compare(response) == 0) {
+        if (solution.compare(response) == 0) {
             i++;
             cout << "Correct!" << endl;
             points++;
