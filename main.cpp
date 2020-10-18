@@ -9,7 +9,7 @@ using namespace std;
 void vocabulary();
 void history();
 void influencers();
-void q_and_a(vector<string>, vector<string>);
+void q_and_a(vector<string>, vector<string>, vector<string>);
 void selection();
 void play();
 
@@ -27,9 +27,12 @@ void vocabulary() {
     question_file.open("definitions.txt");
     ifstream answer_file; // read mode
     answer_file.open("vocab.txt");
+    ifstream links_file; // read mode
+    links_file.open("vocablinks.txt"); 
 
     vector<string> questions;
     vector<string> answers;
+    vector<string> links;
 
     string line;
     while (getline(question_file, line)) {
@@ -38,11 +41,15 @@ void vocabulary() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
 
     question_file.close();
     answer_file.close();
+    links_file.close();
 
-    q_and_a(questions, answers);
+    q_and_a(questions, answers, links);
 }
 
 void history() {
@@ -50,10 +57,13 @@ void history() {
     question_file.open("inventions.txt");
     ifstream answer_file; // read mode
     answer_file.open("inventors.txt");
-
+    ifstream links_file; // read mode
+    links_file.open("inventorlinks.txt");
+    
     vector<string> questions;
     vector<string> answers;
-
+    vector<string> links;
+    
     string line;
     while (getline(question_file, line)) {
         questions.push_back(line);
@@ -61,22 +71,29 @@ void history() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
-
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
+    
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
-
-}
+    links_file.close();
+    
+    q_and_a(questions, answers, links);
+} 
 
 void influencers() {
     ifstream question_file; // read mode
     question_file.open("quotes.txt");
     ifstream answer_file; // read mode
     answer_file.open("speakers.txt");
-
+    ifstream links_file; // read mode
+    links_file.open("speakerlinks.txt");
+    
     vector<string> questions;
     vector<string> answers;
-
+    vector<string> links;
+    
     string line;
     while (getline(question_file, line)) {
         questions.push_back(line);
@@ -84,13 +101,18 @@ void influencers() {
     while (getline(answer_file, line)) {
         answers.push_back(line);
     }
-
+    while (getline(links_file, line)) {
+        links.push_back(line);
+    }
+    
     question_file.close();
     answer_file.close();
-    q_and_a(questions, answers);
-}
+    links_file.close();
+    
+    q_and_a(questions, answers, links);
+} 
 
-void q_and_a(vector<string> q, vector<string> a) {
+void q_and_a(vector<string> q, vector<string> a, vector<string> l) {
     unsigned int i = 0;
     string response;
 
