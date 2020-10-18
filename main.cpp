@@ -105,9 +105,10 @@ void q_and_a(vector<string> q, vector<string> a) {
         //char response[100];
         string response;
         //cin.ignore();
+        if (i == 0) {
+            getline(cin, response);
+        }
         getline(cin, response);
-        getline(cin, response);
-        //cin.getline(response, 100);
 
  //       cout << "Response was: " << response << endl;
  //       cout << "A[i] is: " << a[i] << endl;
