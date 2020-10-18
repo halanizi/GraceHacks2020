@@ -180,11 +180,9 @@ void selection(){
     char input;
     while (x == 0)
     {
-        cout << "         (1) Vocabulary" << endl;
-        cout << "         (2) History" << endl;
-        cout << "         (3) Influencers" << endl;
-        cout << "         (4) Blah" << endl;
-        cout << "         (5) BlahBlah\n"<< endl;
+        cout << "         (*) Vocabulary" << endl;
+        cout << "         (*) History" << endl;
+        cout << "         (*) Influencers" << endl;
 
         cin >> option;
         input = option.at(0);
